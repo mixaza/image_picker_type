@@ -69,7 +69,6 @@ class ImagePickerHelper extends StatelessWidget {
                 ? ImageSource.camera
                 : ImageSource.gallery)
         .then((img) {
-          print("FOOOOOOOOOOOOOOOOOOOOOOOOOORMAT ${imageCompressFormat.toString()}");
       return ImageCropper().cropImage(
           sourcePath: img!.path,
           maxHeight: size.height.toInt(),
