@@ -73,7 +73,7 @@ class ImagePickerHelper extends StatelessWidget {
           sourcePath: img!.path,
           maxHeight: size.height.toInt(),
           maxWidth: size.width.toInt(),
-          compressFormat: ImageCompressFormat.jpg,
+          compressFormat: imageCompressFormat,
           aspectRatio: CropAspectRatio(
               ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
           aspectRatioPresets: [
