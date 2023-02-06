@@ -69,11 +69,13 @@ class ImagePickerHelper extends StatelessWidget {
                 ? ImageSource.camera
                 : ImageSource.gallery)
         .then((img) {
+      print(imageCompressFormat);
+      print("CUSTOM");
       return ImageCropper().cropImage(
           sourcePath: img!.path,
           maxHeight: size.height.toInt(),
           maxWidth: size.width.toInt(),
-          compressFormat: imageCompressFormat,
+          compressFormat: ImageCompressFormat.png,
           aspectRatio: CropAspectRatio(
               ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
           aspectRatioPresets: [
@@ -127,6 +129,7 @@ class ImagePickerHelper extends StatelessWidget {
               cancelButtonTitle: iosSettings?.cancelButtonTitle,
             )
           ]);
+
     });
   }
 }
