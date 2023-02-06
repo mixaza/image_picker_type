@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker_type/image_picker_type.dart';
-
+import 'package:image_cropper/image_cropper.dart';
 void main() {
   runApp(MyApp());
 }
@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -62,6 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (BuildContext context) {
                           return SafeArea(
                             child: ImagePickerHelper(
+                              imageCompressFormat: ImageCompressFormat.png,
                               // isSave: true,  //if you want to save image in directory
                               size: Size(300, 300),
                               onDone: (file) {
