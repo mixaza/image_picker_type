@@ -11,6 +11,7 @@ enum ImagePickerType { GALLERY, CAMERA }
 class ImagePickerHelper extends StatelessWidget {
   const ImagePickerHelper(
       {Key? key,
+        this.imageCompressFormat =ImageCompressFormat.jpg,
       required this.onDone,
       required this.size,
       this.androidSettings,
@@ -21,6 +22,7 @@ class ImagePickerHelper extends StatelessWidget {
   final Size size;
   final AndroidSetting? androidSettings;
   final IOSSettings? iosSettings;
+  final  ImageCompressFormat imageCompressFormat;
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +73,7 @@ class ImagePickerHelper extends StatelessWidget {
           sourcePath: img!.path,
           maxHeight: size.height.toInt(),
           maxWidth: size.width.toInt(),
+          compressFormat: imageCompressFormat,
           aspectRatio: CropAspectRatio(
               ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
           aspectRatioPresets: [
