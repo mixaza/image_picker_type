@@ -11,7 +11,7 @@ enum ImagePickerType { GALLERY, CAMERA }
 class ImagePickerHelper extends StatelessWidget {
   const ImagePickerHelper(
       {Key? key,
-        this.imageCompressFormat =ImageCompressFormat.jpg,
+        this.imageCompressFormat = ImageCompressFormat.jpg,
       required this.onDone,
       required this.size,
       this.androidSettings,
