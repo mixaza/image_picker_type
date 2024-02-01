@@ -1,9 +1,8 @@
 name: image_picker_type
-description: A Flutter plugin for iOS and Android for picking images from the image library and crop it.
+description: This is a fork from https://github.com/mixaza/image_picker_type, A Flutter plugin for iOS and Android for picking images from the image library and crop it.
 version: 2.0.0
 #author:
-homepage: https://github.com/jayeshpansheriya/image_picker_type
-
+homepage: https://github.com/mixaza/image_picker_type
 environment:
   sdk: ">=3.0.0 <4.0.0"
   flutter: ">=3.10.0"
