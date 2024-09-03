@@ -13,8 +13,9 @@ dependencies:
   image_picker: ^1.1.2
   image_cropper: ^8.0.2
   cupertino_icons: ^1.0.8
-  lints: ^4.0.0
+
 dev_dependencies:
+  lints: ^4.0.0
   flutter_test:
     sdk: flutter
 
