@@ -13,13 +13,15 @@ class ImagePickerHelper extends StatelessWidget {
       {Key? key,
       required this.imageCompressFormat,
       required this.onDone,
-      required this.size,
+      this.size,
+      this.aspectRatio,
       this.androidSettings,
       this.iosSettings})
       : super(key: key);
 
   final Function(File?) onDone;
-  final Size size;
+  final Size? size;
+  final CropAspectRatio? aspectRatio;
   final AndroidSetting? androidSettings;
   final IOSSettings? iosSettings;
   final ImageCompressFormat imageCompressFormat;
@@ -71,11 +73,9 @@ class ImagePickerHelper extends StatelessWidget {
         .then((img) {
       return ImageCropper().cropImage(
           sourcePath: img!.path,
-          maxHeight: size.height.toInt(),
-          maxWidth: size.width.toInt(),
+          maxHeight: size?.height.toInt(),
+          maxWidth: size?.width.toInt(),
           compressFormat: imageCompressFormat,
-          aspectRatio: CropAspectRatio(
-              ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
           uiSettings: [
             AndroidUiSettings(
                 toolbarTitle: androidSettings?.toolbarTitle,
