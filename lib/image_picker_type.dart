@@ -78,51 +78,67 @@ class ImagePickerHelper extends StatelessWidget {
               ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
           uiSettings: [
             AndroidUiSettings(
-              toolbarTitle: androidSettings?.toolbarTitle,
-              toolbarColor: androidSettings?.toolbarColor,
-              statusBarColor: androidSettings?.statusBarColor,
-              toolbarWidgetColor: androidSettings?.toolbarWidgetColor,
-              backgroundColor: androidSettings?.backgroundColor,
-              activeControlsWidgetColor:
-                  androidSettings?.activeControlsWidgetColor,
-              dimmedLayerColor: androidSettings?.dimmedLayerColor,
-              cropFrameColor: androidSettings?.cropFrameColor,
-              cropGridColor: androidSettings?.cropGridColor,
-              cropFrameStrokeWidth: androidSettings?.cropFrameStrokeWidth,
-              cropGridRowCount: androidSettings?.cropGridRowCount,
-              cropGridColumnCount: androidSettings?.cropGridColumnCount,
-              cropGridStrokeWidth: androidSettings?.cropGridStrokeWidth,
-              showCropGrid: androidSettings?.showCropGrid,
-              lockAspectRatio: androidSettings?.lockAspectRatio,
-              hideBottomControls: androidSettings?.hideBottomControls,
-              initAspectRatio: androidSettings?.initAspectRatio,
-            ),
+                toolbarTitle: androidSettings?.toolbarTitle,
+                toolbarColor: androidSettings?.toolbarColor,
+                statusBarColor: androidSettings?.statusBarColor,
+                toolbarWidgetColor: androidSettings?.toolbarWidgetColor,
+                backgroundColor: androidSettings?.backgroundColor,
+                activeControlsWidgetColor:
+                    androidSettings?.activeControlsWidgetColor,
+                dimmedLayerColor: androidSettings?.dimmedLayerColor,
+                cropFrameColor: androidSettings?.cropFrameColor,
+                cropGridColor: androidSettings?.cropGridColor,
+                cropFrameStrokeWidth: androidSettings?.cropFrameStrokeWidth,
+                cropGridRowCount: androidSettings?.cropGridRowCount,
+                cropGridColumnCount: androidSettings?.cropGridColumnCount,
+                cropGridStrokeWidth: androidSettings?.cropGridStrokeWidth,
+                showCropGrid: androidSettings?.showCropGrid,
+                lockAspectRatio: androidSettings?.lockAspectRatio,
+                hideBottomControls: androidSettings?.hideBottomControls,
+                initAspectRatio: androidSettings?.initAspectRatio,
+                cropStyle: androidSettings?.cropStyle ?? CropStyle.rectangle,
+                aspectRatioPresets: androidSettings?.aspectRatioPresets ??
+                    const [
+                      CropAspectRatioPreset.original,
+                      CropAspectRatioPreset.square,
+                      CropAspectRatioPreset.ratio3x2,
+                      CropAspectRatioPreset.ratio4x3,
+                      CropAspectRatioPreset.ratio16x9
+                    ]),
             IOSUiSettings(
-              minimumAspectRatio: iosSettings?.minimumAspectRatio,
-              rectX: iosSettings?.rectX,
-              rectY: iosSettings?.rectY,
-              rectWidth: iosSettings?.rectWidth,
-              rectHeight: iosSettings?.rectHeight,
-              showActivitySheetOnDone: iosSettings?.showActivitySheetOnDone,
-              showCancelConfirmationDialog:
-                  iosSettings?.showCancelConfirmationDialog ?? false,
-              rotateClockwiseButtonHidden:
-                  iosSettings?.rotateClockwiseButtonHidden ?? false,
-              hidesNavigationBar: iosSettings?.hidesNavigationBar,
-              rotateButtonsHidden: iosSettings?.rotateButtonsHidden ?? false,
-              resetButtonHidden: iosSettings?.resetButtonHidden ?? false,
-              aspectRatioPickerButtonHidden:
-                  iosSettings?.aspectRatioPickerButtonHidden ?? false,
-              resetAspectRatioEnabled:
-                  iosSettings?.resetAspectRatioEnabled ?? true,
-              aspectRatioLockDimensionSwapEnabled:
-                  iosSettings?.aspectRatioLockDimensionSwapEnabled ?? false,
-              aspectRatioLockEnabled:
-                  iosSettings?.aspectRatioLockEnabled ?? false,
-              title: iosSettings?.title,
-              doneButtonTitle: iosSettings?.doneButtonTitle,
-              cancelButtonTitle: iosSettings?.cancelButtonTitle,
-            )
+                minimumAspectRatio: iosSettings?.minimumAspectRatio,
+                rectX: iosSettings?.rectX,
+                rectY: iosSettings?.rectY,
+                rectWidth: iosSettings?.rectWidth,
+                rectHeight: iosSettings?.rectHeight,
+                showActivitySheetOnDone: iosSettings?.showActivitySheetOnDone,
+                showCancelConfirmationDialog:
+                    iosSettings?.showCancelConfirmationDialog ?? false,
+                rotateClockwiseButtonHidden:
+                    iosSettings?.rotateClockwiseButtonHidden ?? false,
+                hidesNavigationBar: iosSettings?.hidesNavigationBar,
+                rotateButtonsHidden: iosSettings?.rotateButtonsHidden ?? false,
+                resetButtonHidden: iosSettings?.resetButtonHidden ?? false,
+                aspectRatioPickerButtonHidden:
+                    iosSettings?.aspectRatioPickerButtonHidden ?? false,
+                resetAspectRatioEnabled:
+                    iosSettings?.resetAspectRatioEnabled ?? true,
+                aspectRatioLockDimensionSwapEnabled:
+                    iosSettings?.aspectRatioLockDimensionSwapEnabled ?? false,
+                aspectRatioLockEnabled:
+                    iosSettings?.aspectRatioLockEnabled ?? false,
+                title: iosSettings?.title,
+                doneButtonTitle: iosSettings?.doneButtonTitle,
+                cancelButtonTitle: iosSettings?.cancelButtonTitle,
+                cropStyle: iosSettings?.cropStyle ?? CropStyle.rectangle,
+                aspectRatioPresets: iosSettings?.aspectRatioPresets ??
+                    const [
+                      CropAspectRatioPreset.original,
+                      CropAspectRatioPreset.square,
+                      CropAspectRatioPreset.ratio3x2,
+                      CropAspectRatioPreset.ratio4x3,
+                      CropAspectRatioPreset.ratio16x9
+                    ])
           ]);
     });
   }
@@ -178,9 +194,16 @@ class AndroidSetting {
   /// set to true to hide the bottom controls (shown by default)
   final bool? hideBottomControls;
 
+  /// controls the style of crop bounds, it can be rectangle or
+  /// circle style (default is [CropStyle.rectangle]).
+  final CropStyle cropStyle;
+
+  /// controls the list of aspect ratios in the crop menu view.
+  final List<CropAspectRatioPresetData> aspectRatioPresets;
+
   /// desired aspect ratio is applied (from the list of given aspect ratio presets)
   /// when starting the cropper
-  final CropAspectRatioPreset? initAspectRatio;
+  final CropAspectRatioPresetData? initAspectRatio;
 
   AndroidSetting({
     this.toolbarTitle,
@@ -199,6 +222,14 @@ class AndroidSetting {
     this.showCropGrid,
     this.lockAspectRatio,
     this.hideBottomControls,
+    this.cropStyle = CropStyle.rectangle,
+    this.aspectRatioPresets = const [
+      CropAspectRatioPreset.original,
+      CropAspectRatioPreset.square,
+      CropAspectRatioPreset.ratio3x2,
+      CropAspectRatioPreset.ratio4x3,
+      CropAspectRatioPreset.ratio16x9
+    ],
     this.initAspectRatio,
   });
 }
@@ -226,6 +257,10 @@ class IOSSettings {
   /// 90-degree segments in a clockwise direction is shown in the toolbar.
   /// (default is false)
   final bool rotateClockwiseButtonHidden;
+
+  /// Embed the presented TOCropViewController in a UINavigationController.
+  /// (default is false)
+  final bool embedInNavigationController;
 
   /// If this controller is embedded in UINavigationController its navigation bar
   /// is hidden by default. Set this property to false to show the navigation bar.
@@ -280,6 +315,13 @@ class IOSSettings {
   /// Setting this will override the Default which is a localized string for "Cancel".
   final String? cancelButtonTitle;
 
+  /// controls the style of crop bounds, it can be rectangle or
+  /// circle style (default is [CropStyle.rectangle]).
+  final CropStyle cropStyle;
+
+  /// controls the list of aspect ratios in the crop menu view.
+  final List<CropAspectRatioPresetData> aspectRatioPresets;
+
   IOSSettings({
     this.minimumAspectRatio,
     this.rectX,
@@ -289,6 +331,7 @@ class IOSSettings {
     this.showActivitySheetOnDone,
     this.showCancelConfirmationDialog = false,
     this.rotateClockwiseButtonHidden = false,
+    this.embedInNavigationController = false,
     this.hidesNavigationBar,
     this.rotateButtonsHidden = false,
     this.resetButtonHidden = false,
@@ -299,5 +342,13 @@ class IOSSettings {
     this.title,
     this.doneButtonTitle,
     this.cancelButtonTitle,
+    this.cropStyle = CropStyle.rectangle,
+    this.aspectRatioPresets = const [
+      CropAspectRatioPreset.original,
+      CropAspectRatioPreset.square,
+      CropAspectRatioPreset.ratio3x2,
+      CropAspectRatioPreset.ratio4x3,
+      CropAspectRatioPreset.ratio16x9
+    ],
   });
 }
