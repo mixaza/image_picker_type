@@ -76,9 +76,6 @@ class ImagePickerHelper extends StatelessWidget {
           compressFormat: imageCompressFormat,
           aspectRatio: CropAspectRatio(
               ratioX: size.height.toDouble(), ratioY: size.width.toDouble()),
-          aspectRatioPresets: [
-            CropAspectRatioPreset.square,
-          ],
           uiSettings: [
             AndroidUiSettings(
               toolbarTitle: androidSettings?.toolbarTitle,
